@@ -49,12 +49,10 @@ export default function BetIQ() {
   }, [bets]);
 
   // Fetch NBA games
-  const fetchGames = useCallback(async () => {
-    setLoadingGames(true);
-    try {
-      const now = new Date();
-      const future = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-      const url = `https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?apiKey=${ODDS_API_KEY}&regions=us&markets=h2h,spreads,totals&oddsFormat=american&commenceTimeFrom=${now.toISOString()}&commenceTimeTo=${future.toISOString()}`;
+const fetchGames = useCallback(async () => {
+  setLoadingGames(true);
+  try {
+  const url = `https://api.the-odds-api.com/v4/sports/basketball_nba/odds/?apiKey=${ODDS_API_KEY}&regions=us&markets=h2h,spreads,totals&oddsFormat=american`;
       const res = await fetch(url);
       const data = await res.json();
       if (Array.isArray(data)) setGames(data);
